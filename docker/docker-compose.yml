@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  face-recognition:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: face-recognition
+    ports:
+      - "8000:8000"  # Flask API
+      - "7860:7860"  # Gradio UI
+      - "5000:5000"  # Dashboard
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+      - ../recordings:/app/recordings
+      - ../config:/app/config
+      - ~/.insightface:/root/.insightface  # Model cache
+    environment:
+      - LOG_LEVEL=INFO
+      - DATABASE_PATH=/app/data/face_recognition.db
+    restart: unless-stopped
+    networks:
+      - face-recognition-net
+
+networks:
+  face-recognition-net:
+    driver: bridge
+

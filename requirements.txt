@@ -1,0 +1,38 @@
+# Core dependencies
+insightface>=0.7.3
+opencv-python>=4.8.0
+numpy>=1.24.0
+onnxruntime>=1.15.0
+Pillow>=10.0.0
+
+# Web frameworks
+flask>=2.3.0
+flask-cors>=4.0.0
+flask-limiter>=3.0.0
+gradio>=4.0.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# CLI
+click>=8.1.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Utilities
+requests>=2.31.0
+pydantic>=2.0.0
+psutil>=5.9.0
+
+# Optional: GPU support (uncomment if needed)
+# onnxruntime-gpu>=1.15.0  # For CUDA
+# onnxruntime-directml>=1.15.0  # For Windows DirectML
+
+# Development
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.0.0
+

@@ -1,0 +1,117 @@
+# Face Recognition System Configuration
+
+# Model Settings
+model:
+  name: buffalo_l  # RetinaFace model
+  provider: insightface
+  detection_threshold: 0.5
+  recognition_threshold: 0.6
+  embedding_size: 512
+  det_size: [640, 640]  # Detection size
+  providers:  # Execution providers (auto-detected)
+    - CPUExecutionProvider
+    # - CUDAExecutionProvider  # Uncomment for CUDA
+    # - CoreMLExecutionProvider  # Uncomment for Apple Silicon
+
+# API Settings
+api:
+  host: 0.0.0.0
+  port: 8000
+  debug: false
+  auth:
+    enabled: false
+    api_key: ""  # Set API key if auth enabled
+  cors:
+    enabled: true
+    origins: ["*"]
+  rate_limit:
+    enabled: true
+    per_minute: 60
+
+# Database Settings
+database:
+  type: sqlite  # sqlite or postgresql
+  path: data/face_recognition.db
+  # For PostgreSQL:
+  # host: localhost
+  # port: 5432
+  # name: face_recognition
+  # user: postgres
+  # password: ""
+
+# Performance Settings
+performance:
+  batch_size: 1
+  frame_skip: 1  # Process every Nth frame in video
+  max_workers: 4
+  gpu_enabled: false  # Auto-detect if available
+
+# Camera/Stream Settings
+cameras:
+  default_resolution: [1920, 1080]
+  rtsp_timeout: 5
+  max_streams: 4
+
+# Event Settings
+events:
+  alerts:
+    enabled: true
+    unknown_face: true
+    match_found: true
+    liveness_failed: true
+  notifications:
+    email:
+      enabled: false
+      smtp_server: ""
+      smtp_port: 587
+      username: ""
+      password: ""
+      recipients: []
+    webhook:
+      enabled: false
+      url: ""
+    mqtt:
+      enabled: false
+      broker: ""
+      port: 1883
+      topic: "face_recognition/events"
+  recording:
+    enabled: true
+    path: recordings/
+    duration: 30  # seconds
+    on_match: true
+    on_unknown: true
+
+# Liveness Detection Settings
+liveness:
+  enabled: true
+  methods:
+    - eye_blink
+    - head_movement
+    - texture_analysis
+  threshold: 0.7
+  min_blinks: 1
+  head_movement_threshold: 0.1
+
+# Face Recognition Settings
+recognition:
+  similarity_threshold: 0.6
+  max_results: 10
+  min_face_size: 50  # pixels
+  max_face_size: 2000  # pixels
+
+# Face Tracking Settings
+tracking:
+  enabled: true
+  iou_threshold: 0.3  # IoU threshold for bounding box matching
+  embedding_threshold: 0.7  # Similarity threshold for identity matching
+  max_age: 30  # Maximum frames to keep inactive track
+  min_hits: 3  # Minimum detections to confirm a track
+
+# Logging
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  file: logs/face_recognition.log
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+
